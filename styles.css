@@ -1,15 +1,16 @@
 :root {
   color-scheme: light;
-  --blue-950: #12355b;
-  --blue-800: #1b5fa7;
-  --blue-700: #256fc3;
-  --blue-100: #eaf4ff;
+  --sky-950: #12314d;
+  --sky-800: #2f8fd8;
+  --sky-700: #55aeea;
+  --sky-100: #eef9ff;
+  --sky-50: #f7fcff;
   --white: #ffffff;
   --text: #172033;
-  --muted: #5d697b;
-  --border: #c8d7ea;
+  --muted: #557085;
+  --border: #bfddf3;
   --danger: #b42318;
-  --shadow: 0 18px 50px rgba(18, 53, 91, 0.22);
+  --shadow: 0 18px 50px rgba(34, 113, 177, 0.18);
 }
 
 * {
@@ -20,7 +21,7 @@ body {
   min-width: 320px;
   min-height: 100vh;
   margin: 0;
-  background: var(--blue-800);
+  background: linear-gradient(180deg, #bfeeff 0%, #8fdcff 100%);
   color: var(--text);
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   line-height: 1.5;
@@ -29,6 +30,11 @@ body {
 button,
 textarea {
   font: inherit;
+}
+
+img {
+  display: block;
+  max-width: 100%;
 }
 
 .app-shell {
@@ -44,7 +50,7 @@ textarea {
   width: min(100%, 760px);
   flex-direction: column;
   gap: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.42);
+  border: 1px solid rgba(255, 255, 255, 0.5);
   border-radius: 8px;
   background: var(--white);
   box-shadow: var(--shadow);
@@ -56,11 +62,15 @@ textarea {
   gap: 4px;
 }
 
-.app-header h1 {
+.app-header h1,
+.preview-group h2 {
   margin: 0;
-  color: var(--blue-950);
-  font-size: clamp(1.6rem, 4vw, 2.3rem);
+  color: var(--sky-950);
   letter-spacing: 0;
+}
+
+.app-header h1 {
+  font-size: clamp(1.6rem, 4vw, 2.3rem);
   line-height: 1.15;
 }
 
@@ -69,7 +79,8 @@ textarea {
   color: var(--muted);
 }
 
-.field-group {
+.field-group,
+.preview-group {
   display: grid;
   gap: 8px;
 }
@@ -82,8 +93,14 @@ textarea {
   gap: 12px;
 }
 
+.button-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
 label {
-  color: var(--blue-950);
+  color: var(--sky-950);
   font-weight: 700;
 }
 
@@ -100,12 +117,12 @@ textarea {
 }
 
 textarea:focus {
-  border-color: var(--blue-700);
-  box-shadow: 0 0 0 3px rgba(37, 111, 195, 0.18);
+  border-color: var(--sky-700);
+  box-shadow: 0 0 0 3px rgba(85, 174, 234, 0.18);
 }
 
 textarea[readonly] {
-  background: var(--blue-100);
+  background: var(--sky-100);
 }
 
 button {
@@ -117,28 +134,93 @@ button {
   padding: 0 16px;
 }
 
-button:focus-visible {
-  outline: 3px solid rgba(37, 111, 195, 0.32);
+button:focus-visible,
+.preview-link:focus-visible {
+  outline: 3px solid rgba(85, 174, 234, 0.32);
   outline-offset: 2px;
 }
 
 .primary-button {
-  background: var(--blue-700);
+  background: var(--sky-800);
   color: var(--white);
 }
 
 .primary-button:hover {
-  background: var(--blue-800);
+  background: #237cbd;
 }
 
 .secondary-button {
-  border-color: var(--border);
-  background: var(--white);
-  color: var(--blue-800);
+  background: var(--sky-700);
+  color: var(--white);
 }
 
 .secondary-button:hover {
-  background: var(--blue-100);
+  background: var(--sky-800);
+}
+
+.ghost-button {
+  border-color: var(--border);
+  background: var(--white);
+  color: var(--sky-800);
+}
+
+.ghost-button:hover {
+  background: var(--sky-100);
+}
+
+.preview-card {
+  display: grid;
+  gap: 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--sky-50);
+  padding: 12px;
+}
+
+.preview-link {
+  display: block;
+  overflow: hidden;
+  border-radius: 6px;
+  background: #cfeeff;
+}
+
+.preview-link img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.preview-meta {
+  display: grid;
+  gap: 4px;
+}
+
+.preview-title,
+.preview-url {
+  margin: 0;
+}
+
+.preview-title {
+  color: var(--sky-950);
+  font-weight: 700;
+}
+
+.preview-url {
+  color: var(--muted);
+  word-break: break-all;
+}
+
+.preview-card.is-empty .preview-link {
+  display: none;
+}
+
+.preview-card.is-empty .preview-title {
+  font-weight: 400;
+  color: var(--muted);
+}
+
+.preview-card.is-empty .preview-url {
+  display: none;
 }
 
 .error-message {
@@ -164,8 +246,13 @@ button:focus-visible {
     gap: 8px;
   }
 
+  .button-row,
   button {
     width: 100%;
+  }
+
+  .button-row button {
+    flex: 1 1 0;
   }
 
   textarea {

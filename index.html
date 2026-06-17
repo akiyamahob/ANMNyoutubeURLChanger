@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>YouTube URL Fixer</title>
+    <title>YouTube URL Shorter</title>
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
@@ -11,13 +11,15 @@
       <section class="converter" aria-labelledby="app-title">
         <header class="app-header">
           <h1 id="app-title">YouTube URL Fixer</h1>
-          <p>YouTubeのURLを短い共有URLに変換します。</p>
+          <p>YouTubeのURLを某掲示板向けに短い共有URLに変換します</p>
+          <p>URLを"変換前"にペーストすると、"変換後"にURLが出るのでコピーしてください</p>
         </header>
 
         <div class="field-group">
           <div class="field-heading">
             <label for="source-url">変換前</label>
-            <button class="secondary-button" id="paste-button" type="button">ペースト</button>
+            <div class="button-row">
+            </div>
           </div>
           <textarea
             id="source-url"
@@ -34,6 +36,28 @@
           </div>
           <textarea id="result-url" readonly spellcheck="false" aria-describedby="error"></textarea>
         </div>
+
+        <section class="preview-group" aria-labelledby="preview-title">
+          <div class="field-heading">
+            <h2 id="preview-title">プレビュー</h2>
+          </div>
+          <div class="preview-card is-empty" id="preview-card">
+            <a
+              class="preview-link"
+              id="preview-link"
+              href=""
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="動画をYouTubeで開く"
+            >
+              <img id="preview-image" alt="" loading="lazy">
+            </a>
+            <div class="preview-meta">
+              <p class="preview-title" id="preview-title-text">動画サムネとタイトルをここに表示します。</p>
+              <p class="preview-url" id="preview-url-text"></p>
+            </div>
+          </div>
+        </section>
 
         <p class="error-message" id="error" role="status" aria-live="polite"></p>
       </section>
