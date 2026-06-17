@@ -106,7 +106,7 @@ label {
 
 textarea {
   width: 100%;
-  min-height: 150px;
+  min-height: 60px;
   resize: vertical;
   border: 1px solid var(--border);
   border-radius: 8px;
@@ -256,6 +256,6 @@ button:focus-visible,
   }
 
   textarea {
-    min-height: 136px;
+    min-height: 60px;
   }
 }
